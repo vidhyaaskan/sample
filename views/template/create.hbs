@@ -1,0 +1,248 @@
+
+<div class="cc-dashboard-wrapper">
+ {{> header}}
+ <div class="cc-dashboard-main-section">
+{{> sidebar }}
+
+<div class="cc-dasbboard-main">
+                <div class="cc-dashboard-content-wrapper">
+                    <div class="cc-dashboard-breadcrumbs"> 
+                        <h4>Template</h4>
+                        <ol>
+                            <li class="breadcrumb-item"><a href="">Home <span><i class="material-icons"> chevron_right </i></span> </a></li>
+                            <li class="breadcrumb-item active">Create Template  <span><i class="material-icons"> chevron_right </i></span> </li>
+                        </ol>
+                    </div>
+                    <div class="cc-dashboard-content">
+                           
+                            {{!--tab content --}}
+                        <div class="cc-tab-section">
+        <div class="cc-top-section uk-subnav uk-subnav-pill"
+            uk-switcher="animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium">
+            <div><a href="#">Step 1</a></div>
+            <div><a href="#">Step 2</a></div>
+            <div><a href="#">Step 3</a></div>
+        </div>
+
+        <div class="cc-bottom-section uk-switcher uk-margin">
+
+            <div>{{!--step 1--}}
+                <div uk-grid>
+                    <div uk-width-1-2@s>
+                       <select name="category" class="uk-select category" >
+                            <option value="">Choose Category</option>
+                           {{#each category}}  
+                            <option value="{{this.name}}">{{this.name}}</option>
+                             {{/each}}
+                         </select>
+                    </div>
+
+                    <div uk-width-1-2@s>
+                    <select name="templatename" class=" uk-select templatename" >
+                         <option value="">Choose Template</option>
+                                {{#each template}}
+                                <option value="{{this.name}}">{{this.name}}</option>
+                                {{/each}}
+                     </select>
+                   </div>
+               
+            
+         </div>
+                <div class="cc-step-one-section">
+                    <div class="uk-flex uk-flex-between">
+                        <div class="cc-step-sidebar">
+                            <div class="uk-flex-column">
+                                <div class="cc-add-section">
+
+                                    {{!-- <form autocomplete="off"> --}}
+                                        <fieldset class="uk-fieldset">
+                                            <legend class="uk-legend uk-margin">ADD A SECTION</legend>
+                                            <div class="cc-add-section-filed">
+                                                <input class="uk-input sectionsin" type="text"
+                                                    placeholder="Type your section name" name="section">
+                                                    <input type="hidden" name="sec_id" class="sec_id">
+                                            </div>
+                                        </fieldset>
+                                    {{!-- </form> --}}
+
+                                 <div class="cc-added-section secList">
+                                         {{!-- {{#each tempsection}}
+                                            <li {{#if_eq  "0"}}  {{/if_eq}} class="cc-section-list tablinks secclick" data-tabval="{{@key}}" >
+                                                <a class="cc-section-name" href="#">{{this.name}}</a>
+                                                <div class="cc-sectionlist-option">
+                                                    <span class="cc-section-edit"><i class="material-icons" data-editval="{{this.name}}" data-editid="{{this.id}}" data-template="{{this.templatename}}"> edit
+                                                        </i></span>
+                                                    <span class="cc-section-delete"> <i class="material-icons"> delete
+                                                        </i></span>
+                                                </div>
+                                             </li>
+                                           {{/each}} --}}
+                                     
+                                    </div>
+
+                                </div>
+
+                                <div class="cc-add-fields">
+                                    <ul class="uk-list">
+                                       {{#each fieldtype}}
+                                        <li>
+                                            <div class="cc-icon-section"> <i class="material-icons"> {{this.icon}} </i>
+                                            </div>
+                                            <div class="cc-text-section">{{this.name}}</div>
+                                        </li>
+                                        {{/each}}
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="cc-step-maincontainer">
+
+                            <div class="cc-fields-creation-section tabcontent" id="fcs0">
+
+                                <ul class="uk-nav uk-nav-default uk-width-medium" uk-sortable cls-custom="uk-box-shadow-small uk-flex uk-flex-middle uk-background">
+                                    <li>
+                                        <div class="cc-fcs-wrapper-section">
+                                            <div class="cc-fcs-wrapper">
+                                                <div class="cc-drag-handler">
+                                                    <i class="material-icons"> list </i>
+                                                </div>
+                                                <div class="cc-fcs-content" uk-toggle="target: #cc-fe1; animation: uk-animation-fade">
+                                                    <div class="cc-field-wrapper">
+                                                        <div class="cc-filedname">Untitled</div>
+                                                        <div class="cc-field">
+                                                            <input type="text" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <div class="cc-fcs-controlls">
+                                                    <i class="material-icons cc-expand-more" uk-toggle="target: #cc-fe1; animation: uk-animation-fade"> expand_more </i>
+                                                    <i class="material-icons" > add_circle </i>
+                                                    <i class="material-icons"> delete </i>
+                                                </div>
+                                            </div>
+
+                                            <div class="cc-filed-editor" id="cc-fe1" hidden>
+                                                <div class="cc-filed-editor-controlls">
+                                                    <i class="material-icons SaveField" > save </i>
+                                                    <i class="material-icons" uk-toggle="target:#cc-attr1; animation: uk-animation-fade"> add_circle </i>
+                                                </div>
+                                                <div class="cc-basic">
+                                                    <div class="cc-fe-wrapper">
+                                                        <div class="cc-fe-lable">Field Name</div>
+                                                        <div class="cc-fe-field">
+                                                            <input class="uk-input field_name" type="text" name="field_name" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="cc-fe-wrapper">
+                                                        <div class="cc-fe-lable">Field Type</div>
+                                                        <div class="cc-fe-field">
+                                                            <select class="uk-select field_type" name="field_type" value="Text">
+                                                                  <option value="text">Text</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cc-fe-wrapper cc-fe-wrapper-fcheckbox">
+                                                        <div class="cc-fe-lable">Required</div>
+                                                        <div class="cc-fe-field cc-fe-field-checkbox">
+                                                            <label class="switch">
+                                                                <input type="checkbox" class="required_field" name="required_field" checked>
+                                                                <span class="slider round"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="cc-attributes" hidden id="cc-attr1">
+                                                     <div class="cc-fe-wrapper">
+                                                        <div class="cc-fe-lable">Defualt Value</div>
+                                                        <div class="cc-fe-field">
+                                                            <input class="uk-input default_value" name="default_value"  type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="cc-fe-wrapper">
+                                                        <div class="cc-fe-lable">Placeholder </div>
+                                                        <div class="cc-fe-field">
+                                                            <input class="uk-input place_value" name="place_value" type="text">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li>
+
+                                  <div class="appendDiv"></div>
+
+                                 {{!-- <div class="cc-drop-area"> --}}
+
+                                            
+                                    {{!-- <div class="boundary-align uk-panel uk-placeholder">
+                                        
+
+                                        
+                                    </div> --}}
+                                {{!-- </div> --}}
+                                    
+
+                                </ul>
+
+                               
+
+                            </div>{{!--one input fields--}}
+
+
+                            
+                            <div  class="cc-fields-creation-section tabcontent" id="fcs1" style="display:none">
+                                jhjj h hjdfjsjhf
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>{{!--step 1 end--}}
+
+            <div>{{!--step 2--}}
+
+                  <div class="cc-drop-area">
+                                    <div class="boundary-align uk-panel uk-placeholder">
+                                        <h5>Drop Files Here</h5>
+                                    </div>
+                    </div>
+                
+
+                {{!-- <textarea id="lettertextarea">Hello, World!</textarea> --}}
+
+                                                
+                </div>{{!--step 2 end--}}
+
+
+            <div>step three</div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+                            {{!--end tab content --}}
+
+
+                        </div>
+                        </div>
+ </div>
+
+
+</div>
+
+</div>

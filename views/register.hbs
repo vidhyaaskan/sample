@@ -1,0 +1,57 @@
+ <div class="cc-login-form-section cc-cent cc-register-form">
+
+        <div class="cc-container">
+            <div class="cc-row no-gutters">
+                
+                <div class="cc-bcol-md-6 cc-form-img-section">
+                    <img src="/images/loginimg.jpg" alt="">
+                </div>
+
+                <div class="cc-bcol-md-6 cc-form-section cc-cent">
+                    <div class="cc-wrap-logo-form">
+                        <div class="cc-logo-section">
+                            <img src="/images/logo.png" alt="">
+                        </div>
+                        <form action="/register" method="POST">
+                            <div class="filds">
+                                <input type="text" id="firstName" placeholder="Firt Name" name="name">
+                                <label for="firstName">{{firstname}}</label>
+                            </div>
+                            <div class="filds">
+                                <input type="text" id="lastName" placeholder="Last Name" name="lastname">
+                                <label for="lastName">{{lastname}}</label>
+                            </div>
+                            <div class="filds">
+                                <input type="email" id="email" placeholder="Email" name="email">
+                                <label for="email">{{email}}</label>
+                            </div>
+                            <div class="filds">
+                                <input type="password" id="password" placeholder="Password" name="password">
+                                <label for="password">{{pwd}}</label>
+                            </div>
+                            <div class="filds">
+                                <input type="password" id="confirm-password" placeholder="Confirm Password" name="password2">
+                                <label for="confirm-password">{{cnspwd}}</label>
+                            </div>
+
+
+                            <div class="cc-remember-section">
+                                <label class="cc-checkbox-wrapper">
+                                    <span class="cc-checkbox">
+                                        <input type="checkbox" class="cc-checkbox-input" value="">
+                                        <span class="cc-checkbox-inner"></span>
+                                    </span>
+                                    <span>{{agree}}</span>
+                                </label>
+                            </div>
+                            <div class="cc-form-btn-wrapper">
+                              <button class="cc-btn cc-btn-primary" type="submit">{{signup}}</button>
+                                <a href="login.html"  class="cc-btn cc-btn-lr cc-backto-login">{{back}}</a>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

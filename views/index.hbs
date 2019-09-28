@@ -1,0 +1,50 @@
+ <div class="cc-login-form-section cc-cent cc-loginform">
+
+        <div class="cc-container">
+            <div class="cc-row no-gutters">
+                <div class="cc-bcol-md-6 cc-form-img-section">
+                    <img src="/images/loginimg.jpg" alt="">
+                </div>
+                <div class="cc-bcol-md-6 cc-form-section cc-cent">
+                    <div class="cc-wrap-logo-form">
+                        <div class="cc-logo-section">
+                            <img src="/images/logo.png" alt="">
+                        </div>
+                        <form action="/" method="POST" autocomplete="off">
+                            <div class="filds cc-user-filds">
+                                <input type="text" id="firstName" placeholder="Firt Name">
+                                <label for="firstName">{{username}}</label>
+                            </div>
+                            <div class="filds cc-pass-filds">
+                                <input type="password" id="password" placeholder="Password">
+                                <label for="password">{{pwd}}</label>
+                            </div>
+    
+                            <div class="cc-remember-section">
+                                <label class="cc-checkbox-wrapper">
+                                    <span class="cc-checkbox">
+                                        <input type="checkbox" class="cc-checkbox-input" value="">
+                                        <span class="cc-checkbox-inner"></span>
+                                    </span>
+                                    <span>{{remember}}</span>
+                                </label>
+                                <a href="javascript:void(0);">{{forgot}}</a>
+                            </div>
+    
+                            <div class="cc-form-btn-wrapper">
+                                {{!-- <a class="cc-btn cc-btn-primary" href="/home">{{login}}</a> --}}
+                                <button class="cc-btn cc-btn-primary" type="submit">{{login}}</button>
+                            </div>
+    
+                            <div class="cc-regiter-btn cc-hac">
+                                <div><span>{{que}}</span><a  href="/register">{{sign}}</a></div>
+                            </div>
+    
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>

@@ -1,0 +1,32 @@
+.cc-login-form-section .cc-container {  background-color: #fff; padding: 0; box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.05); border-radius: 5px; }
+.cc-form-img-section img{ height: 100%; width: 100%; object-fit: cover; border-radius: 5px 0 0px 5px; }
+.cc-login-form-section { min-height: 100vh; height: auto; width: 100%; background-color: #fbfbfb; }
+.cc-login-form-section  .cc-form-section{ padding:  45px; } 
+.cc-form-img-section .cc-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(39, 205, 255, 0.45) 0%, rgba(174, 45, 254, 0.7) 100%); border-radius: 5px 0 0px 5px; }
+
+.cc-form-section .cc-logo-section { max-width: 120px; margin: 0 auto 24px; display: block; }
+.cc-login-form-section .cc-remember-section { display: flex; justify-content: space-between; align-items: center; }
+.cc-login-form-section .cc-remember-section a { text-decoration: none; font-size: 14px; color: #1890ff; } 
+.cc-login-form-section .cc-form-btn-wrapper { margin-top: 10px; }
+.cc-login-form-section .cc-form-btn-wrapper button , .cc-login-form-section .cc-form-btn-wrapper a { width: 100%; display: inline-block; font-size: 15px; text-align:center; padding: 16px 28px; }
+.cc-regiter-btn { margin-top: 20px; }
+.cc-regiter-btn .cc-form-btn-wrapper { margin-top: 10px; }
+.cc-regiter-btn a { text-decoration: none; margin-left: 5px; font-size: 13px; }
+.cc-backto-login { margin-top: 20px; text-decoration: none; }
+
+.cc-hac {
+    font-size: 15px;
+}
+
+@media only screen and (min-width:1024px) {
+    .cc-login-form-section .cc-container { max-width: 800px; }
+    .cc-login-form-section.cc-register-form .cc-container { max-width: 990px; }
+}
+
+@media only screen and (max-width:767px) { 
+    .cc-login-form-section .cc-container { margin: 45px auto; }
+}
+@media only screen and (max-width:567px) { 
+    .cc-login-form-section .cc-container { width: 95%; }
+    .cc-login-form-section .cc-form-section { padding: 45px 30px; }
+}

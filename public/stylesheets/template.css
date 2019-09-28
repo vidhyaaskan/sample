@@ -1,0 +1,377 @@
+html , body {
+    overflow-x:hidden 
+}
+
+*{
+    box-sizing: border-box;
+}
+
+.cc-tab-section {
+    padding: 0 20px;
+    margin: 75px;
+    box-shadow: 0px 0px 1px 1px rgba(235, 235, 235, 0.64);
+    overflow: hidden;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+    background: #fbfbfb;
+}
+
+.cc-top-section.uk-subnav {
+    justify-content: center;
+}
+
+.cc-top-section.uk-subnav > div {
+    padding: 20px 30px 10px;
+    margin: 0 10px;
+    border-bottom: 2px solid transparent;
+}
+.cc-top-section.uk-subnav > div a {
+    background-color: unset;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.cc-top-section.uk-subnav > div a:hover {
+    background-color: unset;
+}
+.cc-top-section.uk-subnav > div.uk-active  {
+    border-bottom: 2px solid #1e87f0;
+}
+
+.cc-top-section.uk-subnav-pill>.uk-active>a {
+    color: #1e87f0;
+}
+
+.cc-step-sidebar {
+    min-width: 340px;
+    max-width: 340px;
+    padding: 20px;  
+
+}
+
+.cc-step-maincontainer {
+    flex-grow: 2;
+    padding: 20px;  
+}
+
+
+.cc-add-section-filed {
+    margin-bottom: 15px;
+}
+
+.cc-add-section-filed input[type="text"] {
+    padding: 6px 12px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.cc-added-section {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.cc-section-list {
+    display: flex;
+    border-radius: 2px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.07);
+    position: relative;
+    min-width: 64px;
+}
+
+.cc-sectionlist-option {
+    width: 70px;
+    background-color: #fff;
+    padding: 0 10px;
+    transition: all ease-out 0.3s;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0 2px 2px 0;
+    z-index: 3333;
+    position: relative;
+    display: none;
+}
+
+.cc-section-list:hover .cc-sectionlist-option {
+    display: flex;
+}
+
+
+
+.cc-section-list .cc-section-name , .cc-section-list .cc-section-edit , .cc-section-list .cc-section-delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 6px 2px;
+}
+
+.cc-section-list .cc-section-name {
+    padding: 8px 16px;
+    background-color: #1e87f0;
+    color: #fff;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 14px;
+    width: 100%;
+    
+}
+.cc-section-list .cc-section-edit {
+    color: #1e87f0;
+}
+.cc-section-list .cc-section-delete {
+    color: #ff8181;
+}
+
+.cc-section-list .material-icons {
+    font-size: 22px;
+}
+
+.cc-section-list::before ,.cc-section-list::after {
+    display: none !important;
+}
+
+
+.cc-fields-creation-section {
+    background-color: #fff;
+    box-shadow: 0px 0px 2px #ededed;
+    padding: 30px 0px;
+}
+
+.cc-fields-creation-section  .cc-fcw {
+	    display: flex !important;
+    margin: 0;
+    width: 100% !important;
+        justify-content: space-between;
+}
+
+.cc-fields-creation-section > ul {
+	width: 100%;
+}
+
+
+.cc-fields-creation-section > ul > li {
+    width: 100%;
+    border-bottom: 1px solid #ededed;
+}
+
+.cc-fields-creation-section > ul > li:hover {
+		background-color: #f8f8f8;
+}
+
+.cc-fcs-wrapper-section {
+	display: flex !important;
+	width: 100% !important;
+	flex-direction: column;
+}
+
+.cc-fcs-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100% ;
+    align-items: center;
+    padding: 20px;
+}
+
+.cc-fields-creation-section > ul > li:last-child{
+	border-bottom: 0px;
+}
+
+.cc-drag-handler , .cc-fcs-controlls {
+	line-height: 0;
+}
+
+.cc-fcs-controlls {
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 88px;
+}
+
+.cc-fcs-controlls .cc-expand-more {
+	font-size: 28px;
+}
+
+.cc-fcs-controlls .material-icons {
+	cursor: pointer;
+}
+
+
+.cc-fcs-content {
+	width: 75%;
+}
+
+.cc-fcs-content .cc-field-wrapper input {
+    padding: 10px;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid #b1b1b1;
+    background-color: transparent;
+    outline: none;
+}
+
+.cc-filed-editor {
+	padding: 20px;
+    background-color: #fff;
+}
+
+.cc-filed-editor-controlls {
+	    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cc-filed-editor-controlls .material-icons {
+    margin: 10px;
+    cursor: pointer;
+    margin-right: 0;
+    color: #1e87f0;
+}
+
+.cc-basic {
+	display: flex;
+    justify-content: space-between;
+}
+
+
+.cc-basic .cc-fe-wrapper {
+  width: 42%;
+}
+
+.cc-fe-wrapper.cc-fe-wrapper-fcheckbox {
+	width: auto;
+}
+
+.cc-attributes {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-top: 20px;
+	border-top: 1px solid whitesmoke;
+    padding-top: 20px;
+}
+
+.cc-attributes .cc-fe-wrapper {
+	width: 48%;
+	margin-bottom: 10px;
+}
+
+
+.cc-fe-field-checkbox {
+	    height: 40px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cc-fe-field-checkbox .switch {
+position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 22px;
+}
+
+.cc-fe-field-checkbox .switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.cc-fe-field-checkbox .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.cc-fe-field-checkbox .slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.cc-fe-field-checkbox input:checked + .slider {
+  background-color: #2196F3;
+}
+
+.cc-fe-field-checkbox input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.cc-fe-field-checkbox input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.cc-fe-field-checkbox .slider.round {
+  border-radius: 34px;
+}
+
+.cc-fe-field-checkbox .slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+/*add filed */
+
+
+.cc-add-fields ul {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.cc-add-fields ul li {
+    display: flex;
+    padding: 5px;
+    background: white;
+    width: 48%;
+    border-radius: 3px;
+    border: 1px solid #e7e7e7;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.cc-add-fields ul li  .cc-icon-section {
+    line-height: 0;
+    color: #1e87f0;
+}
+
+.cc-text-section {
+	margin-left: 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 25px;
+}
+
+.cc-drop-area {
+	width: 95%;
+    margin: 0 auto;
+}
+
+.cc-drop-area {
+	margin-top: 30px;
+}
+
+.cc-drop-area h5 {
+	    text-align: center;
+    font-size: 26px;
+    color: lightgrey;
+    text-transform: uppercase;
+}
