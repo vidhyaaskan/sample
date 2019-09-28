@@ -4,15 +4,15 @@ const User = mongoose.model('User');
 const bcrypt = require('bcryptjs');
 
 module.exports = function(passport){
-  console.log('kjjkjk');
+ 
     // Local Strategy
     passport.use(new LocalStrategy(function(email, password, done){
       // Match Username
       console.log(email,password);
-      console.log('checkstatus');
+ 
       let query = {email:email};
       User.findOne(query, function(err, user){
-        console.log('userfound');
+ 
         if(err) throw err;
         if(!user){
           return done(null, false, {message: 'No user found'});
