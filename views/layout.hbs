@@ -2,15 +2,17 @@
 <html>
   <head>
     <title>E-Sign</title>
-     {{!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous"> --}}
-         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {{!--<link rel='stylesheet' href='/stylesheets/style.css'/>--}}
       <link rel="stylesheet" href="/stylesheets/common.css" />
     <link rel="stylesheet" href="/stylesheets/loginform.css"/>
     <link rel="stylesheet" href="/stylesheets/dashboard.css"/>
     <link rel="stylesheet" href="/stylesheets/uikit.min.css"/>
     <link rel="stylesheet" href="/stylesheets/template.css"/>
+   
+    <link rel="stylesheet" href="/stylesheets/quill.snow.css">
+    <link rel="stylesheet" href="/stylesheets/datepicker.min.css">
 
     
   </head>
@@ -19,33 +21,73 @@
   </body>
 </html>
 
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
  <script src="/javascripts/jq3.js"></script>
      <script src="/javascripts/app.js"></script>
      <script src="/javascripts/template.js"></script>
-     <script src="/javascripts//uikit.min.js"></script>
+     <script src="/javascripts/uikit.min.js"></script>
+     <script src="/javascripts/quill.min.js"></script>
+    <script src="/javascripts/datepicker.js"></script>
 <script>
+    var editor = new Quill('#editor', {
+            modules: { 
+                toolbar: '#toolbar' 
+            },
+            theme: 'snow'
+        });
 
-  tinymce.init({
-    selector: '#lettertextarea'
-  });
+
+        // datepicker 
 
 
+        // date picker 
+        jQuery(".cc-date-picker").flatpickr({
+            dateFormat: "d.m.Y" ,
+            minDate: "today"
+        });
 
-/*let templatename=$('.templatename').val();
-let category= $('.category').val();
-if(templatename =="" && category ==""){
-  $('.sectionsin').prop("disabled", true); 
-}*/
+        // time picker 
+        jQuery(".cc-time-picker").flatpickr({
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+        });
 
-$('.templatename').change(function(){
-  let val=$(this).val();
-  $('.temphidden').val(val);
+        // timedate picker 
+        jQuery(".cc-date-time-picker").flatpickr({
+            enableTime: true,
+            dateFormat: "d-m-Y H:i",
+            minDate: "today"
+        });
+
+        // range picker 
+        jQuery(".cc-date-range-picker").flatpickr({
+            mode: "range",
+            dateFormat: "d.m.Y" ,
+            minDate: "today"
+        });
+
+        //dropdown 
+        jQuery('.cc-drop-down-selector .uk-nav li').on('click',function(ev){
+            let val =  jQuery(this).attr('data-dropdown-val');
+            let inputval =  jQuery(this).parent().parent().siblings("input").val(val) ;
+        });
+
+    /*let templatename=$('.templatename').val();
+    let category= $('.category').val();
+    if(templatename =="" && category ==""){
+      $('.sectionsin').prop("disabled", true); 
+    }*/
+  
+  $('.templatename').change(function(){
+    let val=$(this).val();
+    $('.temphidden').val(val);
   });
 
 function openFC(evt, tabName){
+  
    let id = 'fcs'+tabName;
-    var i, tabcontent, tablinks;
+   var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
       tabcontent[i].style.display = "none";
@@ -58,14 +100,34 @@ function openFC(evt, tabName){
     evt.currentTarget.className += " active";
 }
 
-if(document.getElementById("defaultOpen") != null){
+if(document.getElementById("defaultOpen") != null ) {
     document.getElementById("defaultOpen").click();
-  }
-
-function editsection(e,id,name,tempname,category){
-
-  alert(id);
 }
+
+  $('.add_New').click(function(){
+
+  });
+
+$(document).on('change', '.templatename', function() {
+    let category =$('.category').val();
+    let temp = $(this).val();
+     $.ajax({
+                url:'template/sections', 
+                method:'GET',
+                data: {category:category,templatename:temp}, 
+                success: function(data){ 
+                  ElemnetLoop(data);
+                   
+                }
+            });
+      });
+
+ function editsection(e,id,name,tempname,category){
+       $('.category').val(category);
+       $('. templatename').val(tempname);
+       $('.sectionsin').val(name);
+       $('.sec_id').val(id);
+ }
 
 function ElemnetLoop(data){
   let html = '';
@@ -75,13 +137,11 @@ function ElemnetLoop(data){
    id='defaultOpen';
    else
    id = 'defaultOpen'+index;
-
   html +=`<ul class='uk-list'><li id=${id} class='cc-section-list tablinks secclick' ><a class='cc-section-name' onclick='openFC(event,${index})'>${value.name}</a><span class='cc-section-edit'><div class='cc-sectionlist-option'>
     <i class='material-icons' onclick='editsection(event,"${value._id}","${value.name}","${value.templatename}","${value.category}")'>edit</i></span><span class='cc-section-delete'><i class='material-icons'>delete</i></span></div></li></ul>`;
    });
-
-  $('.secList').html(html);
-}
+     $('.secList').html(html);
+   }
 
 $('.sectionsin').on('keyup', function(e){
     if(e.keyCode === 13) {
@@ -95,11 +155,11 @@ $('.sectionsin').on('keyup', function(e){
                 data: {category:category,templatename:templatename,section:section,sec_id:sec_id}, 
                 success: function(data){ 
                   ElemnetLoop(data);
+                 
                 }
             });
- 
-    }
-});
+          }
+    });
 
   $('.SaveField').click(function(){
     let field_name = $('.field_name').val();
@@ -107,13 +167,20 @@ $('.sectionsin').on('keyup', function(e){
     let required_field = $('.required_field').val();
     let default_value = $('.default_value').val();
     let place_value = $('.place_value').val();
+    let section = $(this).data('section_Id');
+     $.ajax({
+                url:'template/subfields', 
+                method:'POST',
+                data: {field_name:field_name,field_type:field_type,required_field:required_field,default_value:default_value,place_value:place_value,section:section}, 
+                success: function(data){ 
+                console.log(data);
+                 
+                }
+            });
+         
 
     
   });
 
-/*$('.clonebtn').click(function(){
-  let index=$(this).data('indexclone');
-  $("#clonediv").clone().appendTo(".appendDiv");
-});*/
 </script>
     

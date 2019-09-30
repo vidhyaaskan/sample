@@ -28,7 +28,7 @@ let templateRouter = require('./routes/template');
 
 
 //express setting
-const { if_eq } = require('./handler/handlerlist');
+const { if_eq,if_selected } = require('./handler/handlerlist');
 
 var app = express();
 //authentication
@@ -45,24 +45,6 @@ app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);
   next();
 });
-
-// Express Validator Middleware
-// app.use(validationResult({
-//   errorFormatter: function(param, msg, value) {
-//       var namespace = param.split('.')
-//       , root    = namespace.shift()
-//       , formParam = root;
-
-//     while(namespace.length) {
-//       formParam += '[' + namespace.shift() + ']';
-//     }
-//     return {
-//       param : formParam,
-//       msg   : msg,
-//       value : value
-//     };
-//   }
-// }));
 
 
 
@@ -86,7 +68,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.set('hbs', exphbs({ extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/',helpers: {
-  if_eq:if_eq
+  if_eq:if_eq,if_selected:if_selected
 }
 }));
 app.set('view engine', 'hbs');
@@ -105,7 +87,7 @@ app.use(['/','/register'], indexRouter);
 app.use('/users', usersRouter);
 // app.use('/register', registerRouter);
 app.use('/home', homeRouter);
-app.use(['/template','/template/sections'], templateRouter);
+app.use(['/template','/template/sections','/template/subfields'], templateRouter);
 
 
 //catch 404 and forward to error handler

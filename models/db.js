@@ -7,6 +7,7 @@ mongoose.connect('mongodb://localhost:27017/esign', { useNewUrlParser: true }, (
 
 require('./users.model');
 require('./category.model');
+require('./subfield.model');
 require('./fieldtype.model');
 require('./section.model');
 require('./template.model');

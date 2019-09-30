@@ -16,7 +16,7 @@
                     <div class="cc-dashboard-content">
                            
                             {{!--tab content --}}
-                        <div class="cc-tab-section">
+    <div class="cc-tab-section">
         <div class="cc-top-section uk-subnav uk-subnav-pill"
             uk-switcher="animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium">
             <div><a href="#">Step 1</a></div>
@@ -25,11 +25,10 @@
         </div>
 
         <div class="cc-bottom-section uk-switcher uk-margin">
-
             <div>{{!--step 1--}}
                 <div uk-grid>
                     <div uk-width-1-2@s>
-                       <select name="category" class="uk-select category" >
+                       <select name="category" class="uk-select category">
                             <option value="">Choose Category</option>
                            {{#each category}}  
                             <option value="{{this.name}}">{{this.name}}</option>
@@ -37,23 +36,20 @@
                          </select>
                     </div>
 
-                    <div uk-width-1-2@s>
-                    <select name="templatename" class=" uk-select templatename" >
+                  <div uk-width-1-2@s>
+                    <select name="templatename" class=" uk-select templatename">
                          <option value="">Choose Template</option>
-                                {{#each template}}
+                            {{#each template}}
                                 <option value="{{this.name}}">{{this.name}}</option>
-                                {{/each}}
+                            {{/each}}
                      </select>
                    </div>
-               
-            
-         </div>
+                 </div>
                 <div class="cc-step-one-section">
                     <div class="uk-flex uk-flex-between">
                         <div class="cc-step-sidebar">
                             <div class="uk-flex-column">
                                 <div class="cc-add-section">
-
                                     {{!-- <form autocomplete="off"> --}}
                                         <fieldset class="uk-fieldset">
                                             <legend class="uk-legend uk-margin">ADD A SECTION</legend>
@@ -65,23 +61,21 @@
                                         </fieldset>
                                     {{!-- </form> --}}
 
-                                 <div class="cc-added-section secList">
-                                         {{!-- {{#each tempsection}}
-                                            <li {{#if_eq  "0"}}  {{/if_eq}} class="cc-section-list tablinks secclick" data-tabval="{{@key}}" >
-                                                <a class="cc-section-name" href="#">{{this.name}}</a>
+                               <div class="cc-added-section secList">
+                                   {{#each sections}}
+                                <ul class='uk-list'>   <li {{#if_eq @key '0'}} {{/if_eq}} class="cc-section-list tablinks secclick" onclick="openFC(event,{{@key}})" >
+                                                <a class="cc-section-name" href="#" >{{this.name}}</a>
                                                 <div class="cc-sectionlist-option">
-                                                    <span class="cc-section-edit"><i class="material-icons" data-editval="{{this.name}}" data-editid="{{this.id}}" data-template="{{this.templatename}}"> edit
+                                                    <span class="cc-section-edit"><i class="material-icons"> edit
                                                         </i></span>
                                                     <span class="cc-section-delete"> <i class="material-icons"> delete
-                                                        </i></span>
+                                                        </i> </span>
                                                 </div>
-                                             </li>
-                                           {{/each}} --}}
-                                     
-                                    </div>
+                                            </li></ul>
 
-                                </div>
-
+                                   {{/each}}
+                               </div>
+                               </div>
                                 <div class="cc-add-fields">
                                     <ul class="uk-list">
                                        {{#each fieldtype}}
@@ -90,26 +84,24 @@
                                             </div>
                                             <div class="cc-text-section">{{this.name}}</div>
                                         </li>
-                                        {{/each}}
-
+                                       {{/each}}
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
-
+ 
                         <div class="cc-step-maincontainer">
-
-                            <div class="cc-fields-creation-section tabcontent" id="fcs0">
-
+                        {{#each sections}}
+                           <div class="cc-fields-creation-section tabcontent" id="fcs{{@key}}">
+                              <h3>Section Name : {{this.name}}</h3>    
                                 <ul class="uk-nav uk-nav-default uk-width-medium" uk-sortable cls-custom="uk-box-shadow-small uk-flex uk-flex-middle uk-background">
                                     <li>
                                         <div class="cc-fcs-wrapper-section">
                                             <div class="cc-fcs-wrapper">
                                                 <div class="cc-drag-handler">
                                                     <i class="material-icons"> list </i>
-                                                </div>
-                                                <div class="cc-fcs-content" uk-toggle="target: #cc-fe1; animation: uk-animation-fade">
+                                            </div>
+                                                <div class="cc-fcs-content" uk-toggle="target: #cc-fe{{@key}}; animation: uk-animation-fade">
                                                     <div class="cc-field-wrapper">
                                                         <div class="cc-filedname">Untitled</div>
                                                         <div class="cc-field">
@@ -117,17 +109,17 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            <div class="cc-fcs-controlls">
-                                                    <i class="material-icons cc-expand-more" uk-toggle="target: #cc-fe1; animation: uk-animation-fade"> expand_more </i>
-                                                    <i class="material-icons" > add_circle </i>
-                                                    <i class="material-icons"> delete </i>
-                                                </div>
-                                            </div>
 
-                                            <div class="cc-filed-editor" id="cc-fe1" hidden>
+                                            <div class="cc-fcs-controlls">
+                                                    <i class="material-icons cc-expand-more" uk-toggle="target: #cc-fe{{@key}}; animation: uk-animation-fade"> expand_more </i>
+                                                    <i class="material-icons"> delete </i>
+                                                    {{!-- <i class="material-icons" >add_circle </i> --}}
+                                                 </div>
+                                            </div>
+                                            <div class="cc-filed-editor" id="cc-fe{{@key}}" hidden>
                                                 <div class="cc-filed-editor-controlls">
-                                                    <i class="material-icons SaveField" > save </i>
-                                                    <i class="material-icons" uk-toggle="target:#cc-attr1; animation: uk-animation-fade"> add_circle </i>
+                                                    <i class="material-icons SaveField" data-section_Id="{{this.id}}"> save </i>
+                                                    {{!--<i class="material-icons" uk-toggle="target:#cc-attr1; animation: uk-animation-fade"> add_circle </i> --}}
                                                 </div>
                                                 <div class="cc-basic">
                                                     <div class="cc-fe-wrapper">
@@ -136,96 +128,385 @@
                                                             <input class="uk-input field_name" type="text" name="field_name" >
                                                         </div>
                                                     </div>
+                                                       
                                                     <div class="cc-fe-wrapper">
                                                         <div class="cc-fe-lable">Field Type</div>
                                                         <div class="cc-fe-field">
                                                             <select class="uk-select field_type" name="field_type" value="Text">
-                                                                  <option value="text">Text</option>
-                                                            </select>
+                                                               <option value="">Choose Field Type</option>
+                                                               <option value="text" selected>Text</option>
+                                                               <option value="textarea">Text Area</option>
+                                                               <option value="number">Number</option>
+                                                               <option value="currency">Currency</option>
+                                                               <option value="date">Date</option>
+                                                               <option value="datetime">Date & Time</option>
+                                                               <option value="dropdown">Dropdown</option>
+                                                               <option value="checkbox">Checkbox</option>
+                                                               <option value="radio">Radio</option>
+                                                               <option value="attachment">Attachment</option>
+                                                                {{!-- {{#each Fields.fields}}
+                                                                 <option value="{{this.value}}" {{if_selected this.value 'text'}}>{{this.label}}</option>
+                                                                 {{/each}} --}}
+                                                                </select>
                                                         </div>
                                                     </div>
                                                     <div class="cc-fe-wrapper cc-fe-wrapper-fcheckbox">
                                                         <div class="cc-fe-lable">Required</div>
                                                         <div class="cc-fe-field cc-fe-field-checkbox">
                                                             <label class="switch">
-                                                                <input type="checkbox" class="required_field" name="required_field" checked>
+                                                            <input type="checkbox" class="required_field" name="required_field" checked>
                                                                 <span class="slider round"></span>
                                                             </label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="cc-attributes" hidden id="cc-attr1">
-                                                     <div class="cc-fe-wrapper">
+
+                                                <div class="cc-attributes" id="cc-attr1">
+                                                     <div class="cc-fe-wrapper" uk-width-1-2@s>
                                                         <div class="cc-fe-lable">Defualt Value</div>
-                                                        <div class="cc-fe-field">
+                                                        <div class="cc-fe-field" >
                                                             <input class="uk-input default_value" name="default_value"  type="text">
                                                         </div>
                                                     </div>
-                                                    <div class="cc-fe-wrapper">
+                                                    <div class="cc-fe-wrapper" uk-width-1-2@s>
                                                         <div class="cc-fe-lable">Placeholder </div>
-                                                        <div class="cc-fe-field">
+                                                        <div class="cc-fe-field" >
                                                             <input class="uk-input place_value" name="place_value" type="text">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </li>
-
-                                  <div class="appendDiv"></div>
-
-                                 {{!-- <div class="cc-drop-area"> --}}
-
-                                            
-                                    {{!-- <div class="boundary-align uk-panel uk-placeholder">
-                                        
-
-                                        
-                                    </div> --}}
+                                
+                                {{!-- <div class="cc-drop-area"> --}}
+                                {{!-- <div class="boundary-align uk-panel uk-placeholder">
+                                  </div> --}}
                                 {{!-- </div> --}}
-                                    
 
-                                </ul>
-
-                               
-
-                            </div>{{!--one input fields--}}
+                               </ul>
+                           </div>{{!--one input fields--}}
 
 
+                            {{/each}}
+
+                            <button class="uk-button uk-button-primary uk-button-small add_New" style="margin-left: 37%;margin-top: 98px;">Add New</button>
                             
-                            <div  class="cc-fields-creation-section tabcontent" id="fcs1" style="display:none">
+                            {{!-- <div  class="cc-fields-creation-section tabcontent" id="fcs1" style="display:none">
                                 jhjj h hjdfjsjhf
-                            </div>
-
-
-
-
-
-
-
+                            </div> --}}
                         </div>
                     </div>
                 </div>
+
             </div>{{!--step 1 end--}}
 
-            <div>{{!--step 2--}}
 
-                  <div class="cc-drop-area">
-                                    <div class="boundary-align uk-panel uk-placeholder">
-                                        <h5>Drop Files Here</h5>
-                                    </div>
+
+
+
+
+            {{!--step 2--}}
+
+              <div class="cc-step-two">
+                <div class="cc-drop-document-section">
+                    <div class="cc-drop-area">
+                        <div class="boundary-align uk-panel uk-placeholder">
+                            <h5>Drop Your Document Here...</h5>
+                        </div>
                     </div>
-                
+                </div>
+                <div class="cc-text-editor-section">
+                    <div class="cc-text-editor">
 
-                {{!-- <textarea id="lettertextarea">Hello, World!</textarea> --}}
+                        <div id="toolbar">
+
+                            <div class="ql-formats">
+                                <select class="ql-font">
+                                </select>
+                                <select class="ql-size">
+                                    <option value="small"></option>
+                                    <option selected></option>
+                                    <option value="large"></option>
+                                    <option value="huge"></option>
+                                </select>
+                            </div>
+
+                            <div class="ql-formats">
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                                <button class="ql-strike"></button>
+                            </div>
+                                
+                            <div class="ql-formats">
+                                <select class="ql-color">
+                                    <option value="rgb(0, 0, 0)" />
+                                    <option value="rgb(230, 0, 0)" />
+                                    <option value="rgb(255, 153, 0)" />
+                                    <option value="rgb(255, 255, 0)" />
+                                    <option value="rgb(0, 138, 0)" />
+                                    <option value="rgb(0, 102, 204)" />
+                                    <option value="rgb(153, 51, 255)" />
+                                    <option value="rgb(255, 255, 255)" />
+                                    <option value="rgb(250, 204, 204)" />
+                                    <option value="rgb(255, 235, 204)" />
+                                    <option value="rgb(204, 224, 245)" />
+                                    <option value="rgb(235, 214, 255)" />
+                                    <option value="rgb(187, 187, 187)" />
+                                    <option value="rgb(102, 185, 102)" />
+                                </select>
+                                <select class="ql-background">
+                                    <option value="rgb(0, 0, 0)" />
+                                    <option value="rgb(230, 0, 0)" />
+                                    <option value="rgb(255, 153, 0)" />
+                                    <option value="rgb(255, 255, 0)" />
+                                    <option value="rgb(0, 138, 0)" />
+                                    <option value="rgb(0, 102, 204)" />
+                                    <option value="rgb(153, 51, 255)" />
+                                    <option value="rgb(255, 255, 255)" />
+                                    <option value="rgb(250, 204, 204)" />
+                                    <option value="rgb(255, 235, 204)" />
+                                    <option value="rgb(204, 224, 245)" />
+                                    <option value="rgb(235, 214, 255)" />
+                                    <option value="rgb(187, 187, 187)" />
+                                    <option value="rgb(102, 185, 102)" />
+                                </select>
+                            </div>
+
+                            <div class="ql-formats">
+                                <button class="ql-script" value="sub"></button>
+                                <button class="ql-header" value="1"></button>
+                                <button class="ql-header" value="2"></button>
+                                <button class="ql-blockquote"></button>
+                                <button class="ql-code-block"></button>
+                            </div>
+
+                            <div class="ql-formats">
+                                <button class="ql-list" value="ordered"></button>
+                                <button class="ql-list" value="bullet"></button>
+                                <button class="ql-indent" value="-1"></button>
+                                <button class="ql-indent" value="+1"></button>
+                                <button class="ql-direction" value="rtl"></button>
+                            </div>
+                            
+                            <div class="ql-formats">
+                                <button class="ql-link"></button>
+                                <button class="ql-image"></button>
+                                <button class="ql-video"></button>
+                            </div>
+
+
+                            <!-- <button class="ql-align" value="left"></button> -->
+
+                        </div>
+
+                        <div id="editor">
+                            <p>Hello World!</p>
+                        </div>
+                    </div>
+                    <div class="cc-lable-section">
+                        <ul class="uk-list">
+                            <li>From</li>
+                            <li>to</li>
+                            <li>Description</li>
+                        </ul>
+
+                        <div class="cc-ls-btngroup">
+                            <button class="uk-button uk-button-primary">preview</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
                                                 
-                </div>{{!--step 2 end--}}
+                {{!--step 2 end--}}
 
 
-            <div>step three</div>
-        </div>
+            {{!--step 3--}}
+            <div>
+                <div class="cc-form-filling-section">
+                    <div class="cc-ffs-container">
+
+
+                        <form>
+
+                            <div class="cc-ffs-row">
+
+                                <div class="cc-ffs-fields-wrapper cc-ffs-text">
+                                    <div class="cc-field-lable"> FirstName </div>
+                                    <div class="cc-field-type">
+                                        <input class="uk-input" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="cc-ffs-fields-wrapper cc-ffs-text">
+                                    <div class="cc-field-lable"> LastName </div>
+                                    <div class="cc-field-type">
+                                        <input class="uk-input" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="cc-ffs-fields-wrapper cc-ffs-full cc-ffs-textarea">
+                                    <div class="cc-field-lable"> Description </div>
+                                    <div class="cc-field-type">
+                                        <textarea class="uk-textarea" rows="5" placeholder="Type Here..."></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="cc-ffs-fields-wrapper cc-ffs-yn">
+                                    <div class="cc-field-lable"> Yes / No </div>
+                                    <div class="cc-fe-field-wrapper">
+                                        <div class="cc-fe-field cc-fe-field-checkbox">
+                                            <span class="cc-checkbox-label">one</span>
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div class="cc-fe-field cc-fe-field-checkbox">
+                                            <span class="cc-checkbox-label">two</span>
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div class="cc-fe-field cc-fe-field-checkbox">
+                                            <span class="cc-checkbox-label">three</span>
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="cc-ffs-fields-wrapper cc-ffs-checkbox">
+                                    <div class="cc-field-lable"> Checkbox </div>
+                                    <div class="cc-field-type">
+                                        <label><input class="uk-checkbox" type="checkbox" checked> A</label>
+                                        <label><input class="uk-checkbox" type="checkbox"> B</label>
+                                    </div>
+                                </div>
+
+                                <div class="cc-ffs-fields-wrapper cc-ffs-radio">
+                                    <div class="cc-field-lable"> Radio </div>
+                                    <div class="cc-field-type">
+                                        <label><input class="uk-radio" type="radio" name="radio2" checked> A</label>
+                                        <label><input class="uk-radio" type="radio" name="radio2"> B</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="cc-ffs-fields-wrapper cc-ffs-number">
+                                    <div class="cc-field-lable"> Number </div>
+                                    <div class="cc-field-type">
+                                        <input class="uk-input" type="number" min="0">
+                                    </div>
+                                </div>
+
+
+                                <div class="cc-ffs-fields-wrapper cc-ffs-range">
+                                    <div class="cc-field-lable"> Range </div>
+                                    <div class="cc-field-type">
+                                        <input class="uk-range" type="range" value="2" min="0" max="10" step="0.1">
+                                    </div>
+                                </div>
+
+
+                                <div class="cc-ffs-fields-wrapper cc-ffs-file">
+                                    <div class="cc-field-lable"> Attachment </div>
+                                    <div class="cc-field-type">
+                                        <div uk-form-custom="target: true">
+                                            <input type="file">
+                                            <input class="uk-input" type="text" placeholder="Select file" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            
+                                <div class="cc-ffs-fields-wrapper cc-ffs-text cc-ffs-date">
+                                    <div class="cc-field-lable">Date</div>
+                                    <div class="cc-field-type">
+                                        <input class="uk-input cc-date-picker" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="cc-ffs-fields-wrapper cc-ffs-text cc-ffs-time">
+                                    <div class="cc-field-lable">Time</div>
+                                    <div class="cc-field-type">
+                                        <input class="uk-input cc-time-picker" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="cc-ffs-fields-wrapper cc-ffs-text cc-ffs-date-time">
+                                    <div class="cc-field-lable">Date Time</div>
+                                    <div class="cc-field-type">
+                                        <input class="uk-input cc-date-time-picker" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="cc-ffs-fields-wrapper cc-ffs-text cc-ffs-date-range">
+                                    <div class="cc-field-lable">Date Range</div>
+                                    <div class="cc-field-type">
+                                        <input class="uk-input cc-date-range-picker" type="text">
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="cc-ffs-fields-wrapper">
+                                    <div class="cc-field-lable"> Currency </div>
+                                    <div class="cc-currency-dropdown">
+                                        <div class="cc-drop-down-selector cc-ffs-text cc-small-dropdown">
+                                            <input type="text" name="" id="" class="uk-input" readonly value="$">
+                                            <div uk-dropdown>
+                                                <ul class="uk-nav uk-dropdown-nav">
+                                                    <li data-dropdown-val="$">$</li>
+                                                    <li data-dropdown-val="$2">$2</li>
+                                                    <li data-dropdown-val="$3">$3</li>
+                                                    <li data-dropdown-val="$4">$4</li>
+                                                    <li data-dropdown-val="$5">$5</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="cc-field-type">
+                                            <input class="uk-input" type="number">
+                                        </div>
+                                    </div>
+                                </div>
+
+                      
+                                <div class="cc-ffs-fields-wrapper cc-ffs-select">
+                                    <div class="cc-field-lable">Select</div>
+                                    <div class="cc-field-type">
+                                        <select name="" id="" class="uk-select">
+                                            <option value="">option one</option>
+                                            <option value="">option two</option>
+                                            <option value="">option three</option>
+                                            <option value="">option four</option>
+                                            <option value="">option five</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                
+
+
+
+                               
+                            </div>
+                           
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>  
+        {{!--step 3 end--}}
 
 
     </div>

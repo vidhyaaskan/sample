@@ -27,69 +27,50 @@ router.post('/', function(req, res, next){
 });
 
 router.get('/register', function(req, res, next) {
-  res.render('register', { 
-  firstname:"First Name",
-  lastname: "Last Name",
-  email: "Email",
-  pwd: "Password",
-  cnspwd: "Confirm Password",
-  agree: "I agree to the Terms of User",
-  signup: "Sing Up",
-  back: "Back",
-  });
-});
+  res.render('register');
+ });
 
-router.post('/register',[
-  // username must be an email
-  check('email').isEmail(),
-  // password must be at least 5 chars long
-  // check('password').isLength({ min: 5 }),
-  check('name').not().isEmpty(),
-  check('password').not().isEmpty(),
-  check('lastname').not().isEmpty()
-  
-
-], function(req, res){
-  const name = req.body.name;
-  const email = req.body.email;
-  const lastname = req.body.lastname;
-  const password = req.body.password;
-  const password2 = req.body.password2;
-
-
-  const errors = validationResult(req);
-
-   if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
+ router.post('/register',[
+  check('firstname').not().isEmpty().withMessage('First Name field is required'),
+  check('lastname').not().isEmpty().withMessage('Lastname field is required'),
+  check('email').isEmail().withMessage('email field is required'),
+  check('password').isLength({ min: 6 }).withMessage('Password Must be at least 5 chars long and Requried'),
+  check('confirmpassword').custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error('Password confirmation does not match password');
+    }
+    return true;
+  }),
+], (request, response) => {
+ const errors = validationResult(request);
+  if (!errors.isEmpty()) {   
+   let  errmsg = {"firstnameError":"","lastnameError":"","emailError":"","passwordError":"","confirmpasswordError":""};
+   let fiObj = Object.assign(request.body,errmsg);
+    handleValidationError(errors,fiObj);
+    response.render("register",{register:fiObj});
+  }else{
+  request.body.password = bcrypt.hashSync(request.body.password, 10);
+  var user = new User(request.body);
+  var result =  user.save();
+  response.redirect('/');
   }
-    
-    let newUser = new User({
-      name:name,
-      email:email,
-      lastname:lastname,
-      password:password
-    });
-
-    bcrypt.genSalt(10, function(err, salt){
-      bcrypt.hash(newUser.password, salt, function(err, hash){
-        if(err){
-          console.log(err);
-        }
-        newUser.password = hash;
-        console.log(newUser);
-        newUser.save(function(err){
-          if(err){
-            console.log(err);
-            return;
-          } else {
-           req.flash('success','You are now registered and can log in');
-            res.redirect('/');
-          }
-        });
-      });
-    });
-  
 });
 
-
+function handleValidationError(err,body) { 
+    for (field in err.errors) { 
+       switch (err.errors[field].param) {
+            case 'firstname': body.firstnameError = err.errors[field].msg; 
+            break; 
+            case 'lastname': body.lastnameError = err.errors[field].msg;  
+            break; 
+            case 'email': body.emailError = err.errors[field].msg; 
+             break;
+             case 'password' : body.passwordError = err.errors[field].msg; 
+             break;
+             case 'confirmpassword': body.confirmpasswordError = err.errors[field].msg; 
+             break;
+              default: 
+              break; 
+           }
+        }}
 module.exports = router;

@@ -12,41 +12,65 @@
                         <div class="cc-logo-section">
                             <img src="/images/logo.png" alt="">
                         </div>
-                        <form action="/register" method="POST">
+                        <form action="/register" method="POST" autocomplete="off">
                             <div class="filds">
-                                <input type="text" id="firstName" placeholder="Firt Name" name="name">
-                                <label for="firstName">{{firstname}}</label>
+							<div class="form-group">
+                                <input type="text" id="firstName" class="form-control" name="firstname" placeholder="Firt Name" value="{{register.firstname}}">
+                                <label for="firstName">First Name</label>
+						    <div class="text-danger">
+                                 {{register.firstnameError}}
+                            </div>
+                            </div>
                             </div>
                             <div class="filds">
-                                <input type="text" id="lastName" placeholder="Last Name" name="lastname">
-                                <label for="lastName">{{lastname}}</label>
+							 <div class="form-group">
+       
+                                <input type="text" id="lastName" class="form-control" name="lastname" placeholder="Last Name" value="{{register.lastname}}">
+                                <label for="lastName">Last Name</label>
+								 <div class="text-danger">
+                                    {{register.lastnameError}}
+                                </div>
+                                </div>   
                             </div>
                             <div class="filds">
-                                <input type="email" id="email" placeholder="Email" name="email">
-                                <label for="email">{{email}}</label>
+	                        	 <div class="form-group">
+                                <input type="email" id="email" class="form-control" name="email" placeholder="Email" value="{{register.email}}">
+                                <label for="email">Email</label>
+							 <div class="text-danger">
+                                    {{register.emailError}}
+                                </div>
+                                </div>
                             </div>
                             <div class="filds">
-                                <input type="password" id="password" placeholder="Password" name="password">
-                                <label for="password">{{pwd}}</label>
+							 <div class="form-group">
+                                <input type="password" id="password" class="form-control" name="password" placeholder="Password" value="{{register.password}}">
+                                <label for="password">Password</label>
+							 <div class="text-danger">
+                                    {{register.passwordError}}
+                                </div>
+                                </div>
                             </div>
                             <div class="filds">
-                                <input type="password" id="confirm-password" placeholder="Confirm Password" name="password2">
-                                <label for="confirm-password">{{cnspwd}}</label>
+                                <div class="form-group">
+                                    <input type="password" id="confirm-password" class="form-control" name="confirmpassword" placeholder="Confirm Password" value="{{register.confirmpassword}}">
+                                    <label for="confirm-password">Confirm Password</label>
+                                        <div class="text-danger">
+                                            {{register.confirmpasswordError}}
+                                         </div>
+                                </div>		  
                             </div>
-
-
                             <div class="cc-remember-section">
                                 <label class="cc-checkbox-wrapper">
                                     <span class="cc-checkbox">
                                         <input type="checkbox" class="cc-checkbox-input" value="">
                                         <span class="cc-checkbox-inner"></span>
                                     </span>
-                                    <span>{{agree}}</span>
+                                    <span>I agree to the Terms of User</span>
                                 </label>
                             </div>
                             <div class="cc-form-btn-wrapper">
-                              <button class="cc-btn cc-btn-primary" type="submit">{{signup}}</button>
-                                <a href="login.html"  class="cc-btn cc-btn-lr cc-backto-login">{{back}}</a>
+                                <button class="cc-btn cc-btn-primary" type="submit">Sing Up</button>
+                                <a href="/"  class="cc-btn cc-btn-lr cc-backto-login">Back</a>
                             </div>
 
                         </form>
